@@ -593,7 +593,6 @@ def SetupDetail() -> None:
             Uij[i][j] = 1   # local
 
     # Coefficients of the equation of state
-    global an
     an[1] = 0.1538326
     an[2] = 1.341953
     an[3] = -2.998583
@@ -654,7 +653,6 @@ def SetupDetail() -> None:
     an[58] = 0.002850908
 
     # Density exponents
-    global bn
     bn[1] = 1; bn[2] = 1; bn[3] = 1; bn[4] = 1; bn[5] = 1
     bn[6] = 1; bn[7] = 1; bn[8] = 1; bn[9] = 1; bn[10] = 1
     bn[11] = 1; bn[12] = 1; bn[13] = 1; bn[14] = 1; bn[15] = 1
@@ -670,7 +668,6 @@ def SetupDetail() -> None:
 
     # Exponents on density in EXP[-cn*D^kn] part
     # The cn part in this term is not included in this program since it is 1 when kn<>0][and 0 otherwise
-    global kn
     kn[13] = 3; kn[14] = 2; kn[15] = 2; kn[16] = 2; kn[17] = 4
     kn[18] = 4; kn[21] = 2; kn[22] = 2; kn[23] = 2; kn[24] = 4
     kn[25] = 4; kn[26] = 4; kn[27] = 4; kn[29] = 1; kn[30] = 1
@@ -681,7 +678,6 @@ def SetupDetail() -> None:
     kn[56] = 2; kn[57] = 2; kn[58] = 2
 
     # Temperature exponents
-    global un
     un[1] = 0; un[2] = 0.5; un[3] = 1; un[4] = 3.5; un[5] = -0.5
     un[6] = 4.5; un[7] = 0.5; un[8] = 7.5; un[9] = 9.5; un[10] = 6
     un[11] = 12; un[12] = 12.5; un[13] = -6; un[14] = 2; un[15] = 3
@@ -696,7 +692,6 @@ def SetupDetail() -> None:
     un[56] = 0; un[57] = 1; un[58] = 0
 
     # Flags
-    global fn, gn, qn
     fn[13] = 1; fn[27] = 1; fn[30] = 1; fn[35] = 1
     gn[5] = 1; gn[6] = 1; gn[25] = 1; gn[29] = 1; gn[32] = 1
     gn[33] = 1; gn[34] = 1; gn[51] = 1; gn[54] = 1; gn[56] = 1
@@ -752,7 +747,6 @@ def SetupDetail() -> None:
     Ki[21] = 0.4216551
 
     # Orientation parameters
-    global Gi
     Gi[2] = 0.027815
     Gi[3] = 0.189065
     Gi[4] = 0.0793
@@ -773,7 +767,7 @@ def SetupDetail() -> None:
     Gi[19] = 0.0885
 
     # Quadrupole parameters
-    global Qi, Fi # Si, Wi = local
+    # Si, Wi = local
     Qi[3] = 0.69
     Qi[18] = 1.06775
     Qi[19] = 0.633276
