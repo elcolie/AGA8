@@ -137,12 +137,10 @@ def xTermsDetail(x: typ.List[float]) -> None:
 
     # Check to see if a component fraction has changed.
     # If x is the same as the previous call, then exit.
-    print("=======xold Matched=====")
     for i in range(1, NcDetail + 1):
         if abs(x[i] - xold[i]) > 0.0000001:
             icheck = 1
         xold[i] = x[i]
-        print(f"{xold[i]}")
 
     if icheck == 0:
         return
@@ -163,19 +161,9 @@ def xTermsDetail(x: typ.List[float]) -> None:
             F += xi2 * Fi[i]
             for n in range(1, 19):
                 Bs[n] = Bs[n] + xi2 * Bsnij2[i][i][n]
-    print(f"xi2 : {xi2}")
-    print(f"K3 : {K3}")
-    print(f"U : {U}")
-    print(f"G : {G}")
-    print(f"Q : {Q}")
-    print(f"F : {F}")
-    for xx in range(18+1):
-        print(f"{Bs[xx]}", )
 
     K3 = K3 ** 2
     U = U ** 2
-    print(f"K3 : {K3}")
-    print(f"U : {U}")
 
     # Binary pair contributions
     for i in range(1, NcDetail):
@@ -191,9 +179,6 @@ def xTermsDetail(x: typ.List[float]) -> None:
 
     K3 = K3 ** 0.6
     U = U ** 0.2
-    print(f"---K3 : {K3}")
-    print(f"---U : {U}")
-
 
     # Third virial and higher coefficients
     Q2 = Q ** 2
@@ -205,10 +190,6 @@ def xTermsDetail(x: typ.List[float]) -> None:
             Csn[n] = Csn[n] * Q2
         if fn[n] == 1:
             Csn[n] = Csn[n] * F
-    print("=============Csn=======================")
-    for pp in range(NTerms+1):
-        print(Csn[pp])
-    print("====================================\n")
 
 
 def AlpharDetail(itau: int, idel: int, T: float, D: float, ar: typ.List[typ.List[float]]) -> typ.List[typ.List[float]]:
@@ -260,34 +241,18 @@ def AlpharDetail(itau: int, idel: int, T: float, D: float, ar: typ.List[typ.List
     for i in range(4):
         for j in range(4):
             ar[i][j] = 0
-    print("[Tun]:")
     if abs(T - Told) > 0.0000001:
         for n in range(1, 59):
             Tun[n] = pow(T, -un[n])
-            print(Tun[n])
-    print("[Tun]")
+
     Told = T
-    print(f"Told : {Told}")
 
     # Precalculation of common powers and exponents of density
     Dred = K3 * D
     Dknn[0] = 1
-    print(f"Dred : {Dred}")
-    print(f"K3 : {K3}")
-    print(f"D : {D}")
-
-    print("======Dknn before X Dred==========")
-    for n in range(0, 10):
-        print(f"Dknn[{n}] : {Dknn[n]}")
-    print("==================")
 
     for n in range(1, 10):
         Dknn[n] = Dred * Dknn[n - 1]
-
-    print("======Dknn after X Dred==========")
-    for n in range(0, 10):
-        print(f"Dknn[{n}] : {Dknn[n]}")
-    print("==================")
 
     Expn[0] = 1
     for n in range(1, 5):
@@ -337,11 +302,6 @@ def AlpharDetail(itau: int, idel: int, T: float, D: float, ar: typ.List[typ.List
             ar[1][0] -= CoefT1[n] * s0
             ar[1][1] -= CoefT1[n] * s1
             ar[2][0] += CoefT2[n] * s0
-    print("=======ar========")
-    for ii in range(4):
-        for jj in range(4):
-            print(ar[ii][jj])
-    print("===============")
     return ar
 
 def DensityDetail(T: float, P: float, x: typ.List[float], D: float) -> typ.Tuple[float, int, str]:
@@ -386,10 +346,6 @@ def DensityDetail(T: float, P: float, x: typ.List[float], D: float) -> typ.Tuple
         D = abs(D)  # If D<0, then use as initial estimate
     plog = math.log(P)
     vlog = -math.log(D)
-    print("Density detail")
-    print(f"Pressure {P}")
-    print(f"Denstiy: {D}")
-    print("================================")
 
     # Main loop for iteration
     for it in range(1, 21):
@@ -398,12 +354,8 @@ def DensityDetail(T: float, P: float, x: typ.List[float], D: float) -> typ.Tuple
             herr = "Calculation failed to converge in DETAIL method, ideal gas density returned."
             D = P / RDetail / T
             return D, ierr, herr
-        print(f"-vlog : {-vlog}")
         D = math.exp(-vlog)
         P2, Z, dPdDsave = PressureDetail(T, D, x)
-        print(f"P2 : {P2}")
-        print(f"Z : {Z}")
-        print(f"dPdDsave : {dPdDsave}")
 
         if dPdDsave < epsilon or P2 < epsilon:
             vlog += 0.1
