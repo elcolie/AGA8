@@ -14,14 +14,12 @@ class TestStringMethods(unittest.TestCase):
                               0.002, 0.0001, 0.0025, 0.007, 0.001]
         x.insert(0, 0.0)
 
-        mm: float = 0.0
-        mm = detail.MolarMassDetail(x)
+        mm: float = detail.MolarMassDetail(x)
         print(f"Molar Mass: {mm}")
 
         T: float = 400
         P: float = 50000
-        D: float = 1e10
-        D_of_T_and_P, ierr_no, herr = detail.DensityDetail(T, P, x, D)
+        D_of_T_and_P, ierr_no, herr = detail.DensityDetail(T, P, x)
 
         _P, _Z, _dPdD, _d2PdD2, _d2PdTD, _dPdT, _U, _H, _S, _Cv, _Cp, _W, _G, _JT, _Kappa = detail.PropertiesDetail(
             T, D_of_T_and_P, x)

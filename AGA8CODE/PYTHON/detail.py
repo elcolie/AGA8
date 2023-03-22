@@ -304,7 +304,7 @@ def AlpharDetail(itau: int, idel: int, T: float, D: float, ar: typ.List[typ.List
             ar[2][0] += CoefT2[n] * s0
     return ar
 
-def DensityDetail(T: float, P: float, x: typ.List[float], D: float) -> typ.Tuple[float, int, str]:
+def DensityDetail(T: float, P: float, x: typ.List[float]) -> typ.Tuple[float, int, str]:
     # Calculate density as a function of temperature and pressure
 
     # Sub DensityDetail(T, P, x, D, ierr, herr)
@@ -332,6 +332,9 @@ def DensityDetail(T: float, P: float, x: typ.List[float], D: float) -> typ.Tuple
     dpdlv: float = 0.0
     vdiff: float = 0.0
     tolr: float = 0.0
+    D: float = 0.0
+
+    assert 1.0 == sum(x)
 
     # Initialize variables
     ierr = 0
